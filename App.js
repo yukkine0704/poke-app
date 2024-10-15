@@ -1,98 +1,16 @@
-import React, { useState, useMemo } from 'react';
-import { SafeAreaView, View, StyleSheet, ActivityIndicator } from 'react-native';
+import React, { useMemo } from 'react';
+import { StyleSheet} from 'react-native';
 import { NavigationContainer, DefaultTheme as NavigationDefaultTheme, DarkTheme as NavigationDarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Provider as PaperProvider, Card, Text,Button,TextInput, MD3DarkTheme, MD3LightTheme } from 'react-native-paper';
-import { StatusBar } from 'expo-status-bar';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Provider as PaperProvider, MD3DarkTheme, MD3LightTheme} from 'react-native-paper';
 import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
 import { useColorScheme } from 'react-native';
 import merge from 'deepmerge';
+import HomeScreen from './screens/homescreen';
+import PokemonDetailsScreen from './screens/pokemonDetails';
+
 
 const Stack = createStackNavigator();
-
-const HomeScreen = ({ navigation }) => {
-  const [pokemonName, setPokemonName] = useState('');
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="auto" />
-      <TextInput
-        style={styles.input}
-        placeholder="Buscar Pokémon"
-        value={pokemonName}
-        onChangeText={setPokemonName}
-      />
-      <Button mode='contained' onPress={() => navigation.navigate('PokemonDetails', { name: pokemonName })}>
-        Buscar
-      </Button>
-    </SafeAreaView>
-  );
-};
-
-const PokemonDetailsScreen = ({ route }) => {
-  const { name } = route.params;
-  const [pokemonData, setPokemonData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  React.useEffect(() => {
-    const fetchPokemon = async () => {
-      if (name.trim()) {
-        try {
-          const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
-          const data = await response.json();
-          setPokemonData(data);
-        } catch (error) {
-          console.error(error);
-          setPokemonData(null);
-        } finally {
-          setLoading(false);
-        }
-      } else {
-        setLoading(false);
-      }
-    };
-    
-    fetchPokemon();
-  }, [name]);
-
-  if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
-
-  if (!pokemonData) {
-    return (
-      <View style={styles.loadingContainer}>
-        <Text>No se encontró el Pokémon.</Text>
-      </View>
-    );
-  }
-  return (
-    <SafeAreaView style={styles.container}>
-      <Card style={styles.card}>
-        <Card.Title title={pokemonData.name.toUpperCase()} />
-        <Card.Content>
-          <View style={styles.infoContainer}>
-            <Icon name="height" size={24} color="#FF6214"/>
-            <Text style={styles.infoText}>Altura: {pokemonData.height}</Text>
-          </View>
-          <View style={styles.infoContainer}>
-            <Icon name="fitness-center" size={24} color="#FF6214" />
-            <Text style={styles.infoText}>Peso: {pokemonData.weight}</Text>
-          </View>
-          <View style={styles.infoContainer}>
-            <Icon name="star" size={24} color="#FF6214" />
-            <Text style={styles.infoText}>Habilidades: {pokemonData.abilities.map(ab => ab.ability.name).join(', ')}</Text>
-          </View>
-        </Card.Content>
-      </Card>
-    </SafeAreaView>
-  );
-};
 
 export default function App() {
   const colorScheme = useColorScheme();
@@ -151,5 +69,15 @@ const styles = StyleSheet.create({
   infoText: {
     marginLeft: 8,
     fontSize: 16,
+  },
+  footer: {
+    padding: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 'auto',
+  },
+  footerText: {
+    fontSize: 14,
+    marginLeft: 14
   },
 });
