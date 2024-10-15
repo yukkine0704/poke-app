@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Image } from 'react-native';
-import { Card, Text, ActivityIndicator } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
+import { Card, Text, ActivityIndicator, Chip, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Footer from '../components/footer';
@@ -9,6 +9,32 @@ const PokemonDetailsScreen = ({ route }) => {
   const { name } = route.params;
   const [pokemonData, setPokemonData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const theme = useTheme();
+
+  const typeColors = {
+    fire: '#FBAE24',
+    water: '#2D79D5',
+    grass: '#4CAF50',
+    electric: '#F6E02D',
+    psychic: '#D5006D',
+    ice: '#AEEEEE',
+    rock: '#BCA40E',
+    ghost: '#6A6B9A',
+    dragon: '#FFB94C',
+  };
+
+  const typeIcons = {
+    fire: 'whatshot',
+    water: 'water',
+    grass: 'eco',
+    electric: 'flash-on',
+    psychic: 'psychology',
+    ice: 'ac_unit',
+    rock: 'mountain',
+    ghost: 'ghost',
+    dragon: 'dragon',
+    flying: 'flight',
+  };
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -67,6 +93,17 @@ const PokemonDetailsScreen = ({ route }) => {
               Habilidades: {pokemonData.abilities.map(ab => ab.ability.name).join(', ')}
             </Text>
           </View>
+          {pokemonData.types.map((typeInfo) => (
+              <Chip
+                key={typeInfo.type.name}
+                style={[styles.chip, { backgroundColor: typeColors[typeInfo.type.name] || '#ccc' }]}
+                icon={() => (
+                  <Icon name={typeIcons[typeInfo.type.name] || 'star'} size={16} />
+                )}
+              >
+                {typeInfo.type.name.toUpperCase()}
+              </Chip>
+            ))}
         </Card.Content>
       </Card>
       <View style={styles.footerContainer}>
@@ -90,17 +127,19 @@ const styles = StyleSheet.create({
     marginTop: 20,
     padding: 16,
   },
-  image: {
-    width: 100, // Ajusta el tamaño según tus necesidades
-    height: 100,
-    alignSelf: 'center',
-    marginBottom: 16, // Espaciado debajo de la imagen
-    borderRadius: 8, // Bordes redondeados (opcional)
-  },
   infoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 8,
+  },
+  chipContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap', // Permite que los chips se envuelvan
+    marginVertical: 8,
+  },
+  chip: {
+    margin: 4,
+    padding: 8,
   },
   infoText: {
     marginLeft: 8,
