@@ -4,6 +4,7 @@ import { Card, Text, ActivityIndicator, Chip, useTheme } from 'react-native-pape
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Footer from '../components/footer';
+import colors from '../constants/colors';
 
 const PokemonDetailsScreen = ({ route }) => {
   const { name } = route.params;
@@ -11,17 +12,6 @@ const PokemonDetailsScreen = ({ route }) => {
   const [loading, setLoading] = useState(true);
   const theme = useTheme();
 
-  const typeColors = {
-    fire: '#FBAE24',
-    water: '#2D79D5',
-    grass: '#4CAF50',
-    electric: '#F6E02D',
-    psychic: '#D5006D',
-    ice: '#AEEEEE',
-    rock: '#BCA40E',
-    ghost: '#6A6B9A',
-    dragon: '#FFB94C',
-  };
 
   const typeIcons = {
     fire: 'whatshot',
@@ -96,7 +86,7 @@ const PokemonDetailsScreen = ({ route }) => {
           {pokemonData.types.map((typeInfo) => (
               <Chip
                 key={typeInfo.type.name}
-                style={[styles.chip, { backgroundColor: typeColors[typeInfo.type.name] || '#ccc' }]}
+                style={[styles.chip, { backgroundColor: colors[typeInfo.type.name] || '#ccc' }]}
                 icon={() => (
                   <Icon name={typeIcons[typeInfo.type.name] || 'star'} size={16} />
                 )}
