@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, FlatList, View, Alert } from 'react-native';
+import { StyleSheet, FlatList, ActivityIndicator, View, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, TextInput, Card, Title, ActivityIndicator } from 'react-native-paper';
+import { Button, TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import PokemonCard from '../components/pokeCard';
 
 const HomeScreen = () => {
   const [pokemonName, setPokemonName] = useState('');
@@ -44,16 +45,7 @@ const HomeScreen = () => {
   };
 
   const renderItem = ({ item }) => (
-    <Card style={styles.card}>
-      {item.sprites && item.sprites.front_default ? (
-        <Card.Cover source={{ uri: item.sprites.front_default }} />
-      ) : (
-        <View style={styles.placeholder} />
-      )}
-      <Card.Content>
-        <Title>{item.name}</Title>
-      </Card.Content>
-    </Card>
+    <PokemonCard pokemon={item} />
   );
 
   return (
@@ -91,14 +83,6 @@ const styles = StyleSheet.create({
   },
   input: {
     marginBottom: 16,
-  },
-  card: {
-    marginBottom: 16,
-  },
-  placeholder: {
-    width: '100%',
-    height: 150, // Altura estándar para el placeholder
-    backgroundColor: '#ccc',
   },
 });
 
