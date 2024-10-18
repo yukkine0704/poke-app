@@ -53,7 +53,7 @@ const PokemonDetailsScreen = ({ route }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Card style={styles.card}>
-        <Card.Cover source={{ uri: pokemonData.sprites.front_default }} />
+        <Card.Cover source={{ uri: pokemonData.sprites.front_default }} style={{height: '50%', width: '100%'}} />
         <Card.Title title={pokemonData.name.toUpperCase()} />
         <Card.Content>
           <View style={styles.infoContainer}>

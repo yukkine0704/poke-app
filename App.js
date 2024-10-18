@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Provider as PaperProvider, MD3DarkTheme, MD3LightTheme} from 'react-native-paper';
 import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
 import { useColorScheme } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import merge from 'deepmerge';
 import HomeScreen from './screens/homescreen';
 import PokemonDetailsScreen from './screens/pokemonDetails';
@@ -29,9 +30,10 @@ export default function App() {
 
   return (
     <PaperProvider theme={paperTheme}>
+      <StatusBar translucent={true}/>
       <NavigationContainer theme={colorScheme === 'dark' ? CombinedDarkTheme : CombinedLightTheme}>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="PokeDex" component={HomeScreen} />
           <Stack.Screen name="PokemonDetails" component={PokemonDetailsScreen} />
         </Stack.Navigator>
       </NavigationContainer>

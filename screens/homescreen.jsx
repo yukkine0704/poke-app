@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, FlatList, ActivityIndicator, View, Alert } from 'react-native';
+import { StyleSheet, FlatList, ActivityIndicator, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, TextInput } from 'react-native-paper';
+import { Button, Searchbar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import PokemonCard from '../components/pokeCard';
 
@@ -50,13 +50,13 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TextInput
+      <Searchbar
         style={styles.input}
         placeholder="Buscar Pokémon"
         value={pokemonName}
         onChangeText={setPokemonName}
         accessibilityLabel="Nombre del Pokémon"
-        mode="outlined"
+        mode="bar"
       />
       <Button
         mode='contained'
