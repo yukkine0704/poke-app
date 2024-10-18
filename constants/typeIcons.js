@@ -1,4 +1,3 @@
-// icons.js
 const icons = {
     bug: 'pest-control',        // Icono para tipo Bug
     dark: 'nightlight',       // Icono para tipo Dark

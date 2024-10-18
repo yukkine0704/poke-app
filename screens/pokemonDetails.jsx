@@ -1,30 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Card, Text, ActivityIndicator, Chip, useTheme } from 'react-native-paper';
+import { StyleSheet, View, Text } from 'react-native';
+import { Card, ActivityIndicator, Chip, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Footer from '../components/footer';
 import colors from '../constants/colors';
+import icons from '../constants/typeIcons';
 
 const PokemonDetailsScreen = ({ route }) => {
   const { name } = route.params;
   const [pokemonData, setPokemonData] = useState(null);
   const [loading, setLoading] = useState(true);
   const theme = useTheme();
-
-
-  const typeIcons = {
-    fire: 'whatshot',
-    water: 'water',
-    grass: 'eco',
-    electric: 'flash-on',
-    psychic: 'psychology',
-    ice: 'ac_unit',
-    rock: 'mountain',
-    ghost: 'ghost',
-    dragon: 'dragon',
-    flying: 'flight',
-  };
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -50,7 +37,7 @@ const PokemonDetailsScreen = ({ route }) => {
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color={theme.colors.primary} />
       </View>
     );
   }
@@ -66,7 +53,7 @@ const PokemonDetailsScreen = ({ route }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Card style={styles.card}>
-        <Card.Cover source={{ uri: pokemonData.sprites.front_default }}/>
+        <Card.Cover source={{ uri: pokemonData.sprites.front_default }} />
         <Card.Title title={pokemonData.name.toUpperCase()} />
         <Card.Content>
           <View style={styles.infoContainer}>
@@ -83,17 +70,20 @@ const PokemonDetailsScreen = ({ route }) => {
               Habilidades: {pokemonData.abilities.map(ab => ab.ability.name).join(', ')}
             </Text>
           </View>
-          {pokemonData.types.map((typeInfo) => (
+          <View style={styles.chipContainer}>
+            {pokemonData.types.map((typeInfo) => (
               <Chip
                 key={typeInfo.type.name}
-                style={[styles.chip, { backgroundColor: colors[typeInfo.type.name] || '#ccc' }]}
+                style={[styles.chip, { backgroundColor: colors[typeInfo.type.name]}]}
                 icon={() => (
-                  <Icon name={typeIcons[typeInfo.type.name] || 'star'} size={16} />
+                  <Icon name={icons[typeInfo.type.name]} color='#FFFFFF' size={16} />
                 )}
+                textStyle={styles.chipText} // Agrega este estilo para el texto del chip
               >
                 {typeInfo.type.name.toUpperCase()}
               </Chip>
             ))}
+          </View>
         </Card.Content>
       </Card>
       <View style={styles.footerContainer}>
@@ -124,12 +114,15 @@ const styles = StyleSheet.create({
   },
   chipContainer: {
     flexDirection: 'row',
-    flexWrap: 'wrap', // Permite que los chips se envuelvan
+    flexWrap: 'wrap',
     marginVertical: 8,
   },
   chip: {
     margin: 4,
     padding: 8,
+  },
+  chipText: {
+    color: '#FFFFFF',
   },
   infoText: {
     marginLeft: 8,
