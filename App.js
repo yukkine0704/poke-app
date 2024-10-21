@@ -34,7 +34,9 @@ export default function App() {
       <NavigationContainer theme={colorScheme === 'dark' ? CombinedDarkTheme : CombinedLightTheme}>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="PokeDex" component={HomeScreen} />
-          <Stack.Screen name="PokemonDetails" component={PokemonDetailsScreen} />
+          <Stack.Screen name="PokemonDetails" component={PokemonDetailsScreen} options={{
+            headerTransparent: true,
+          }}/>
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

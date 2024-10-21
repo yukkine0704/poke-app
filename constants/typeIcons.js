@@ -7,7 +7,7 @@ const icons = {
     fire: 'whatshot',         // Icono para tipo Fire
     ground: 'terrain',        // Icono para tipo Ground
     ice: 'severe-cold',           // Icono para tipo Ice
-    rock: 'nature',           // Icono para tipo Rock
+    rock: 'fort',           // Icono para tipo Rock
     psychic: 'psychology',    // Icono para tipo Psychic
     fairy: 'star',            // Icono para tipo Fairy
     fighting: 'sports-gymnastics', // Icono para tipo Fighting
