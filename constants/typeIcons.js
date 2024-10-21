@@ -14,7 +14,7 @@ const icons = {
     ghost: 'dark-mode',           // Icono para tipo Ghost
     grass: 'grass',           // Icono para tipo Grass
     normal: 'catching-pokemon',  // Icono para tipo Normal
-    poison: 'blur-circular',      // Icono para tipo Poison (si no está disponible, puedes omitirlo)
+    poison: 'water-drop',      // Icono para tipo Poison (si no está disponible, puedes omitirlo)
     steel: 'security',        // Icono para tipo Steel
     water: 'water',           // Icono para tipo Water
   };

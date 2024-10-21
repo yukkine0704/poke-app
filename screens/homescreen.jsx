@@ -65,6 +65,7 @@ const HomeScreen = () => {
         Buscar
       </Button>
       <FlatList
+      style={{marginTop: 10,}}
         data={pokemonList}
         renderItem={renderItem}
         keyExtractor={(item) => item.name}
