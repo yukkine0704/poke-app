@@ -17,9 +17,9 @@ const PokemonCard = ({ pokemon, onPress }) => {
         <View style={styles.cardContent}>
           <View style={styles.textContainer}>
             <Title style={styles.pokedexNumber}>#{pokemon.id}</Title>
-            <Text style={styles.pokemonName}>
+            <Paragraph style={styles.pokemonName}>
               {capitalizeFirstLetter(pokemon.name)}
-            </Text>
+            </Paragraph>
 
             <View style={styles.chipContainer}>
               {pokemon.types.map((typeInfo, index) => {
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
   pokemonName: {
     fontSize: 26,
     marginBottom: 8,
+    paddingTop:8,
   },
   chipContainer: {
     flexDirection: 'row',

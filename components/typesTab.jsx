@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
-import { Chip } from 'react-native-paper';
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { Chip, Paragraph } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import colors from '../constants/colors';
 import icons from '../constants/typeIcons';
@@ -44,7 +44,7 @@ const TypesTab = ({ pokemonData }) => {
 
   return (
     <View style={styles.tabContainer}>
-      <Text style={styles.infoText}>Type:</Text>
+      <Paragraph style={styles.infoParagraph}>Type:</Paragraph>
       <View style={styles.chipContainer}>
         {pokemonData.types.map(typeInfo => (
           <Chip
@@ -53,14 +53,14 @@ const TypesTab = ({ pokemonData }) => {
             icon={() => (
               <Icon name={icons[typeInfo.type.name]} color='#FFFFFF' size={16} />
             )}
-            textStyle={styles.chipText}
+            textStyle={styles.chipParagraph}
           >
             {typeInfo.type.name.toUpperCase()}
           </Chip>
         ))}
       </View>
 
-      <Text style={styles.infoText}>Weakness:</Text>
+      <Paragraph style={styles.infoParagraph}>Weakness:</Paragraph>
       <View style={styles.chipContainer}>
         {weaknesses.length > 0 ? (
           weaknesses.map((weakness, index) => (
@@ -83,7 +83,7 @@ const TypesTab = ({ pokemonData }) => {
             />
           ))
         ) : (
-          <Text style={styles.infoText}>No hay debilidades disponibles.</Text>
+          <Paragraph style={styles.infoParagraph}>No hay debilidades disponibles.</Paragraph>
         )}
       </View>
     </View>
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     margin: 4,
     padding: 8,
   },
-  chipText: {
+  chipParagraph: {
     color: '#FFFFFF',
   },
 });

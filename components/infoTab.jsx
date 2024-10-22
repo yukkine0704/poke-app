@@ -1,6 +1,6 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet } from 'react-native';
-import { ProgressBar } from 'react-native-paper';
+import { ScrollView, View, StyleSheet } from 'react-native';
+import { ProgressBar, Paragraph } from 'react-native-paper';
 
 const InfoTab = ({ pokemonData }) => {
   const abilities = pokemonData.abilities.map(ab => 
@@ -12,19 +12,19 @@ const InfoTab = ({ pokemonData }) => {
 
   return (
     <ScrollView style={styles.tabContainer}>
-      <Text style={styles.infoText}>Height: {heightInMeters} m</Text>
-      <Text style={styles.infoText}>Weight: {weightInKg} kg</Text>
-      <Text style={styles.infoText}>Base experience: {pokemonData.base_experience}</Text>
-      <Text style={styles.infoText}>Habilities: {abilities}</Text>
+      <Paragraph style={styles.infoParagraph}>Height: {heightInMeters} m</Paragraph>
+      <Paragraph style={styles.infoParagraph}>Weight: {weightInKg} kg</Paragraph>
+      <Paragraph style={styles.infoParagraph}>Base experience: {pokemonData.base_experience}</Paragraph>
+      <Paragraph style={styles.infoParagraph}>Habilities: {abilities}</Paragraph>
       
-      <Text style={styles.infoTextBold}>Statistics:</Text>
+      <Paragraph style={styles.infoParagraphBold}>Statistics:</Paragraph>
       {pokemonData.stats && pokemonData.stats.length > 0 ? (
         pokemonData.stats.map(stat => (
           <View key={stat.name} style={styles.statContainer}>
             <View style={styles.progressContainer}>
-              <Text style={styles.statText}>
+              <Paragraph style={styles.statParagraph}>
                 {stat.name.charAt(0).toUpperCase() + stat.name.slice(1)}: {stat.base}
-              </Text>
+              </Paragraph>
               <View style={styles.progressBarContainer}>
                 <ProgressBar 
                   progress={stat.base / 300}  
@@ -35,7 +35,7 @@ const InfoTab = ({ pokemonData }) => {
           </View>
         ))
       ) : (
-        <Text style={styles.infoText}>No hay estadísticas disponibles.</Text>
+        <Paragraph style={styles.infoParagraph}>No hay estadísticas disponibles.</Paragraph>
       )}
     </ScrollView>
   );
@@ -46,11 +46,11 @@ const styles = StyleSheet.create({
     padding: 16,
     marginBottom:8,
   },
-  infoText: {
+  infoParagraph: {
     fontSize: 16,
     marginBottom: 8,
   },
-  infoTextBold: {
+  infoParagraphBold: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   statContainer: {
     marginBottom: 16,
   },
-  statText: {
+  statParagraph: {
     fontSize: 16,
     marginBottom: 4,
   },
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   progressBarContainer: {
     flex: 1,
-    marginLeft: 8, // Espacio entre el texto y la barra
+    marginLeft: 8, // Espacio entre el Paragrapho y la barra
     overflow: 'hidden', // Asegura que la barra no se salga del contenedor
   },
   progressBar: {

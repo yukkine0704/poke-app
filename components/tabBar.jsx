@@ -10,7 +10,6 @@ const CustomTabBar = ({ routes, index, setIndex }) => (
         mode={index === i ? 'contained' : 'outlined'}
         onPress={() => setIndex(i)}
         style={{ flex: 1, marginHorizontal: 4 }}
-        labelStyle={index === i ? { color: '#fff' } : { color: '#000' }}
       >
         {route.title}
       </Button>

@@ -1,20 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Paragraph } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const StatsTab = ({ speciesData }) => {
   return (
     <View style={styles.tabContainer}>
       <View style={styles.rowContainer}>
-        <Text style={styles.infoTextBold}>Color:</Text>
+        <Paragraph style={styles.infoParagraphBold}>Color:</Paragraph>
         <View style={[styles.colorBox, { backgroundColor: speciesData.color.name }]} />
       </View>
       <View style={styles.rowContainer}>
-        <Text style={styles.infoTextBold}>Habitat :</Text>
-        <Text style={styles.infoText}>{speciesData.habitat?.name || 'Desconocido'}</Text>
+        <Paragraph style={styles.infoParagraphBold}>Habitat :</Paragraph>
+        <Paragraph style={styles.infoParagraph}>{speciesData.habitat?.name || 'Desconocido'}</Paragraph>
       </View>
       <View style={styles.rowContainer}>
-        <Text style={styles.infoTextBold}>Can transform?:</Text>
+        <Paragraph style={styles.infoParagraphBold}>Can transform?:</Paragraph>
         {speciesData.forms_switchable ? (
           <Icon name="check-circle" color="green" size={20} />
         ) : (
@@ -22,12 +23,12 @@ const StatsTab = ({ speciesData }) => {
         )}
       </View>
       <View style={styles.rowContainer}>
-        <Text style={styles.infoTextBold}>Capture rate:</Text>
-        <Text style={styles.infoText}>{speciesData.capture_rate}</Text>
+        <Paragraph style={styles.infoParagraphBold}>Capture rate:</Paragraph>
+        <Paragraph style={styles.infoParagraph}>{speciesData.capture_rate}</Paragraph>
       </View>
       <View style={styles.rowContainer}>
-        <Text style={styles.infoTextBold}>Grouth rate:</Text>
-        <Text style={styles.infoText}>{speciesData.growth_rate.name}</Text>
+        <Paragraph style={styles.infoParagraphBold}>Grouth rate:</Paragraph>
+        <Paragraph style={styles.infoParagraph}>{speciesData.growth_rate.name}</Paragraph>
       </View>
     </View>
   );
@@ -42,13 +43,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 8,
   },
-  infoTextBold: {
+  infoParagraphBold: {
     fontSize: 18,
     fontWeight: 'bold',
     marginRight: 8,
     width: 150,
   },
-  infoText: {
+  infoParagraph: {
     fontSize: 16,
     flex: 1,
   },
