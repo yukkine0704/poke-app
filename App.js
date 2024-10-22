@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer, DefaultTheme as NavigationDefaultTheme, DarkTheme as NavigationDarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Provider as PaperProvider, MD3DarkTheme, MD3LightTheme, Switch, IconButton } from 'react-native-paper';
+import { Provider as PaperProvider, MD3DarkTheme, MD3LightTheme, IconButton } from 'react-native-paper';
 import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
 import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
@@ -38,24 +38,22 @@ export default function App() {
         translucent={true} 
         style={isDarkTheme ? 'light' : 'dark'} // Cambia el estilo de la StatusBar
       />
-      <NavigationContainer theme={colorScheme === 'dark' ? CombinedDarkTheme : CombinedLightTheme}>
-      <Stack.Navigator initialRouteName="Home">
+     <NavigationContainer theme={colorScheme === 'dark' ? CombinedDarkTheme : CombinedLightTheme}>
+        <Stack.Navigator initialRouteName="Home" screenOptions={{
+          headerRight: () => (
+            <View style={styles.switchContainer}>
+              <IconButton
+              onPress={toggleTheme}
+                icon={isDarkTheme ? 'weather-night' : 'white-balance-sunny'}
+                iconColor={isDarkTheme ? theme.dark.onSurface : theme.light.onSurface}
+                size={24}
+              />
+            </View>
+          ),
+        }}>
           <Stack.Screen
             name="PokeDex"
             component={HomeScreen}
-            options={{
-              headerRight: () => (
-                <View style={styles.switchContainer}>
-                  <Switch value={isDarkTheme} onValueChange={toggleTheme} />
-                  <IconButton
-                    icon={isDarkTheme ? 'weather-night' : 'white-balance-sunny'}
-                    color={isDarkTheme ? '#FFD700' : '#000'}
-                    size={24}
-                  />
-                  
-                </View>
-              ),
-            }}
           />
           <Stack.Screen
             name="PokemonDetails"

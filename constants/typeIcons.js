@@ -1,7 +1,7 @@
 const icons = {
     bug: 'pest-control',        // Icono para tipo Bug
     dark: 'nightlight',       // Icono para tipo Dark
-    dragon: 'dragon',         // Icono para tipo Dragon
+    dragon: 'spa',         // Icono para tipo Dragon
     electric: 'electric-bolt',     // Icono para tipo Electric
     flying: 'flight',         // Icono para tipo Flying
     fire: 'whatshot',         // Icono para tipo Fire

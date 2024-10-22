@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, View, StyleSheet } from 'react-native';
-import { ProgressBar, Paragraph } from 'react-native-paper';
+import { ProgressBar, Paragraph, useTheme } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const InfoTab = ({ pokemonData }) => {
   const abilities = pokemonData.abilities.map(ab => 
@@ -9,13 +10,26 @@ const InfoTab = ({ pokemonData }) => {
 
   const heightInMeters = (pokemonData.height / 10).toFixed(2);
   const weightInKg = (pokemonData.weight / 10).toFixed(2);
+  const theme = useTheme();
 
   return (
     <ScrollView style={styles.tabContainer}>
-      <Paragraph style={styles.infoParagraph}>Height: {heightInMeters} m</Paragraph>
-      <Paragraph style={styles.infoParagraph}>Weight: {weightInKg} kg</Paragraph>
-      <Paragraph style={styles.infoParagraph}>Base experience: {pokemonData.base_experience}</Paragraph>
-      <Paragraph style={styles.infoParagraph}>Habilities: {abilities}</Paragraph>
+      <View style={styles.infoContainer}>
+        <Icon name="height" size={24} color={theme.colors.onSurface}/>
+        <Paragraph style={styles.infoParagraph}>Height: {heightInMeters} m</Paragraph>
+      </View>
+      <View style={styles.infoContainer}>
+        <Icon name="fitness-center" size={24} color={theme.colors.onSurface}/>
+        <Paragraph style={styles.infoParagraph}>Weight: {weightInKg} kg</Paragraph>
+      </View>
+      <View style={styles.infoContainer}>
+        <Icon name="star" size={24} color={theme.colors.onSurface}/>
+        <Paragraph style={styles.infoParagraph}>Base experience: {pokemonData.base_experience}</Paragraph>
+      </View>
+      <View style={styles.infoContainer}>
+        <Icon name="power" size={24} color={theme.colors.onSurface}/>
+        <Paragraph style={styles.infoParagraph}>Abilities: {abilities}</Paragraph>
+      </View>
       
       <Paragraph style={styles.infoParagraphBold}>Statistics:</Paragraph>
       {pokemonData.stats && pokemonData.stats.length > 0 ? (
@@ -27,7 +41,7 @@ const InfoTab = ({ pokemonData }) => {
               </Paragraph>
               <View style={styles.progressBarContainer}>
                 <ProgressBar 
-                  progress={stat.base / 300}  
+                  progress={stat.base / 200}  
                   style={styles.progressBar}
                 />
               </View>
@@ -44,11 +58,16 @@ const InfoTab = ({ pokemonData }) => {
 const styles = StyleSheet.create({
   tabContainer: {
     padding: 16,
-    marginBottom:8,
+    marginBottom: 8,
+  },
+  infoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
   },
   infoParagraph: {
     fontSize: 16,
-    marginBottom: 8,
+    marginLeft: 8, // Espacio entre el icono y el texto
   },
   infoParagraphBold: {
     fontSize: 18,
@@ -68,7 +87,7 @@ const styles = StyleSheet.create({
   },
   progressBarContainer: {
     flex: 1,
-    marginLeft: 8, // Espacio entre el Paragrapho y la barra
+    marginLeft: 8, // Espacio entre el párrafo y la barra
     overflow: 'hidden', // Asegura que la barra no se salga del contenedor
   },
   progressBar: {

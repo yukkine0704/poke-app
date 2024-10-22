@@ -47,8 +47,8 @@ const PokemonDetailsScreen = ({ route }) => {
 
   const [index, setIndex] = useState(0);
   const [routes] = useState([
-    { key: 'info', title: 'Statistics' },
-    { key: 'stats', title: 'Info' },
+{ key: 'stats', title: 'Info' },
+{ key: 'info', title: 'Statistics' },
     { key: 'types', title: 'Type' },
   ]);
 
